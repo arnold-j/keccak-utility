@@ -1,0 +1,8 @@
+.env
+
+*.sublime-project
+*.sublime-workspace
+
+.DS_STORE
+
+/build
