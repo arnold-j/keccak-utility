@@ -19,6 +19,8 @@ std::string encryptDecryptAES(const std::string &plaintext) {
         )
     );
 
+    std::cout << ciphertext;
+
     // Decrypt the ciphertext back to plaintext.
     std::string decryptedtext;
     CryptoPP::CBC_Mode<CryptoPP::AES>::Decryption decryptor(key.data(), key.size(), key.data());
