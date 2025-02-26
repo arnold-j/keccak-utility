@@ -1,6 +1,7 @@
 ## Artifiically Generated Cryptographic Utilities
- - leveraging LLM outputs to create cryptographic utilities
- - "experimental" 
+ - leveraging LLM outputs to create cryptographic utilities.
+ - there are comments denoting incomplete utilities.
+ - "experimental"
 
 ** AI Generated Code and README **
 
