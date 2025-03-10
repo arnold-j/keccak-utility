@@ -16,3 +16,15 @@ I'm using the following code to generate the hash:
 #include "Keccak256.h"
 
 int main()
+
+
+execution command:
+I used torchrun (not sure why... just following Meta provided README)
+
+example command
+torchrun --nproc_per_node=1 example_code.py \                                                        
+  --ckpt_dir CodeLlama-7b-Instruct \                                                                                                                           
+  --tokenizer_path CodeLlama-7b-Instruct/tokenizer.model \                                                                                                     
+  --max_seq_len 128 \                                                                                                                                          
+  --max_batch_size 1 \                                                                                                                                         
+  --max_gen_len 1024   
