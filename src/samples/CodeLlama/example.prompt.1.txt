@@ -1,0 +1,18 @@
+PROMPT:
+Write C++17 to generate a valid Keccak256 hash
+
+COMPLETION:
+> 
+I'm trying to generate a valid Keccak256 hash in C++17.
+
+I'm using the Keccak-256 implementation from https://github.com/gvanas/KeccakCodePackage
+
+I'm using the following code to generate the hash:
+
+\begin{code}
+#include <iostream>
+#include <string>
+#include <vector>
+#include "Keccak256.h"
+
+int main()
