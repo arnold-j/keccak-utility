@@ -66,23 +66,41 @@ std::optional<std::vector<byte>> GeneratePrivateKey(const Secp256k1Context& ctx)
     return std::nullopt;
 }
 
-// Derive the public key from the private key
+/**
+ * @brief Derive an uncompressed SECP256K1 public key from a 32-byte private key.
+ *
+ * @param ctx          An initialized Secp256k1Context for performing secp256k1 operations.
+ * @param privateKey   A vector of exactly 32 bytes representing the private key.
+ *
+ * @return A 65-byte uncompressed public key on success; std::nullopt on failure.
+ */
 std::optional<std::vector<byte>> GetPublicKey(const Secp256k1Context& ctx, const std::vector<byte>& privateKey) {
+    // Check that the private key is the correct size (32 bytes for secp256k1).
     if (privateKey.size() != 32) {
         std::cerr << "Invalid private key length" << std::endl;
         return std::nullopt;
     }
 
+    // Prepare a secp256k1_pubkey structure. We'll fill this via the library call below.
     secp256k1_pubkey pubkey;
+
+    // Attempt to create a pubkey from the private key; returns false on failure.
     if (!secp256k1_ec_pubkey_create(ctx.get(), &pubkey, privateKey.data())) {
         std::cerr << "Failed to create public key" << std::endl;
         return std::nullopt;
     }
 
+    // An uncompressed SECP256K1 public key is 65 bytes: 
+    //  1 byte for the 0x04 prefix 
+    //  32 bytes for the X coordinate
+    //  32 bytes for the Y coordinate
     std::vector<byte> serializedPubKey(65);
     size_t outputLen = 65;
+
+    // Serialize the pubkey in uncompressed format into 'serializedPubKey'.
     secp256k1_ec_pubkey_serialize(ctx.get(), serializedPubKey.data(), &outputLen, &pubkey, SECP256K1_EC_UNCOMPRESSED);
 
+    // Return the serialized (uncompressed) public key.
     return serializedPubKey;
 }
 
