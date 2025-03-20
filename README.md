@@ -28,3 +28,5 @@ The main function provides a practical example of using the utility, parsing a p
 **`parsePublicKey`**: This function parses command-line arguments to obtain a public key, either from a hex string input or default test data. It validates the input length, uses `hexToBytes` for conversion, and throws `std::runtime_error` for invalid inputs. The function minimizes allocations by reserving vector capacity and using `std::string_view` for input, making it efficient for command-line parsing in performance-sensitive applications.
 
 **`deriveMultipleAddresses`**: This function derives multiple Ethereum addresses in parallel, distributing work across available hardware threads using an atomic index counter. It validates input sizes, uses thread-local `CryptoPP::Keccak_256` objects to avoid contention, and stores results in pre-allocated buffers, minimizing allocations and ensuring thread safety. The function throws `std::runtime_error` for mismatched inputs, making it suitable for high-throughput batch processing in multi-threaded environments.
+
+Ethereum addresses are 20 bytes long.
